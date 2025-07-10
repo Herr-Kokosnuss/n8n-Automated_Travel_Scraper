@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   try {
     console.log('Starting Fly4Free scraper...');
     
-    // Launch real chrome browser 
+    // Launch real chrome browser with Railway-compatible configuration
     const { browser, page } = await connect({
       headless: 'new',
       args: [
@@ -19,9 +19,17 @@ router.get('/', async (req, res) => {
         '--disable-accelerated-2d-canvas',
         '--no-first-run',
         '--no-zygote',
-        '--disable-gpu'
+        '--disable-gpu',
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-renderer-backgrounding',
+        '--disable-features=TranslateUI',
+        '--disable-web-security',
+        '--disable-extensions'
       ],
-      customConfig: {},
+      customConfig: {
+        executablePath: process.env.CHROME_PATH || process.env.GOOGLE_CHROME_BIN || '/usr/bin/google-chrome-stable'
+      },
       turnstile: true,
       connectOption: {},
       disableXvfb: false,
