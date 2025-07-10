@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
         '--disable-extensions'
       ],
       customConfig: {
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_PATH || process.env.GOOGLE_CHROME_BIN || '/usr/bin/chromium'
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || 'chromium'
       },
       turnstile: true,
       connectOption: {},
