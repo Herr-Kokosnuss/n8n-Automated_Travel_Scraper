@@ -2,6 +2,12 @@
 
 A web scraper that extracts flight deals from travel websites and provides raw content for further processing. The scraper is designed to work with modern websites that use dynamic content loading and optimized for fly4free.com website.
 
+## Live Demo
+
+🚀 **Test the API live:** https://travel-scraper.up.railway.app/scrape/fly4free
+
+This endpoint returns JSON output with scraped flight deals from Fly4Free. You can test it directly in your browser or use it in your applications.
+
 ## What it does
 
 This app scrapes flight deals from Fly4Free and returns raw content that can be processed by language models or other tools. Instead of trying to parse specific HTML elements (which break easily), it extracts the full content and lets you process it however you need.
