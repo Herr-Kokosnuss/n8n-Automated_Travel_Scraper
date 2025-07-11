@@ -54,14 +54,44 @@ router.get('/', async (req, res) => {
     console.log('Waiting for content to load...');
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    // Extract raw text content for LLM processing
+    // Extract raw text content for LLM processing using GPT's HTML filtering approach
     console.log('Extracting raw content...');
     const rawContent = await page.evaluate(() => {
-      // Get the main content area that contains the deals
-      const mainContent = document.querySelector('main') || document.querySelector('#main') || document.querySelector('.main-content') || document.body;
+      // 🗑️ Remove noise tags completely
+      const noiseTags = ['script', 'style', 'noscript', 'iframe', 'svg', 'canvas', 'form', 'input', 'button', 'select', 'textarea'];
+      noiseTags.forEach(tag => {
+        document.querySelectorAll(tag).forEach(el => el.remove());
+      });
+
+      // 🎯 Focus on content-rich tags
+      const contentSelectors = [
+        'article',
+        'main', 
+        'section',
+        'div[class*="content"]',
+        'div[class*="deal"]',
+        'div[class*="post"]',
+        'div[class*="item"]',
+        'p',
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        'ul', 'ol', 'li'
+      ];
+
+      // Get clean content container - prioritize semantic containers
+      let mainContent = document.querySelector('main') || 
+                       document.querySelector('article') || 
+                       document.querySelector('#main') || 
+                       document.querySelector('.main-content') ||
+                       document.querySelector('[class*="content"]') ||
+                       document.querySelector('[class*="deals"]');
       
-      // Extract all text content from links that appear to be deals
-      const dealLinks = Array.from(document.querySelectorAll('a')).filter(link => {
+      // Only if no semantic container found, fallback to body
+      if (!mainContent) {
+        mainContent = document.body;
+      }
+
+      // Extract flight deals from links within clean content
+      const dealLinks = Array.from(mainContent.querySelectorAll('a')).filter(link => {
         const text = link.textContent.trim();
         const href = link.href;
         // Filter for links that contain flight-related content
@@ -74,17 +104,48 @@ router.get('/', async (req, res) => {
                 href.includes('/deal/') || href.includes('/flight/'));
       });
 
-      // Extract raw text data for each potential deal
-      const rawDeals = dealLinks.map((link, index) => {
-        return {
-          id: index + 1,
-          rawText: link.textContent.trim(),
-          url: link.href,
-          htmlContent: link.innerHTML.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-        };
+      // Extract raw text data for each potential deal with duplicate detection
+      const seenUrls = new Set();
+      const rawDeals = [];
+      
+      dealLinks.forEach((link) => {
+        const url = link.href;
+        const text = link.textContent.trim();
+        
+        // Skip duplicates and empty content
+        if (!seenUrls.has(url) && text.length > 20) {
+          seenUrls.add(url);
+          rawDeals.push({
+            id: rawDeals.length + 1,
+            rawText: text,
+            url: url,
+            htmlContent: link.innerHTML.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+          });
+        }
       });
 
-      //  getting the page title and any meta description
+      // Clean up the page text by removing common noise patterns
+      let cleanPageText = mainContent.textContent || '';
+      
+      // Remove common noise patterns
+      const noisePatterns = [
+        /cookie|gdpr|privacy policy|terms of service|accept|consent/gi,
+        /subscribe|newsletter|follow us|sign up|login|register/gi,
+        /loading\.\.\.|please wait|redirecting/gi,
+        /©.*\d{4}|copyright|all rights reserved/gi,
+        /\b(home|about|contact|help|support|faq)\b/gi,
+        /\s+/g // Multiple spaces to single space
+      ];
+      
+      noisePatterns.forEach(pattern => {
+        if (pattern.source === '\\s+') {
+          cleanPageText = cleanPageText.replace(pattern, ' ');
+        } else {
+          cleanPageText = cleanPageText.replace(pattern, ' ');
+        }
+      });
+
+      // Get page metadata
       const pageTitle = document.title || '';
       const metaDescription = document.querySelector('meta[name="description"]')?.content || '';
       
@@ -92,7 +153,7 @@ router.get('/', async (req, res) => {
         pageTitle,
         metaDescription,
         rawDeals,
-        pageText: mainContent.textContent.replace(/\s+/g, ' ').trim() // Complete page content without limit
+        pageText: cleanPageText.trim().substring(0, 10000) // Limit to 10k chars of clean content
       };
     });
 
