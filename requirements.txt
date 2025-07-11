@@ -1,0 +1,17 @@
+# Node.js Travel Scraper Dependencies
+# Install with: npm install
+
+# Core dependencies
+express@^5.1.0
+cors@^2.8.5
+dotenv@^17.1.0
+puppeteer@^24.12.1
+puppeteer-real-browser@^1.4.2
+
+# Node.js version requirement: >=18.0.0
+# 
+# To install all dependencies:
+# npm install
+#
+# To install for production only:
+# npm install --omit=dev 

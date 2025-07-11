@@ -63,7 +63,7 @@ router.get('/', async (req, res) => {
         document.querySelectorAll(tag).forEach(el => el.remove());
       });
 
-      // 🎯 Focus on content-rich tags
+      // Focus on content-rich tags
       const contentSelectors = [
         'article',
         'main', 
