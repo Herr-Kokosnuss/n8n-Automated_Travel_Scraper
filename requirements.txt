@@ -1,17 +1,22 @@
-# Node.js Travel Scraper Dependencies
-# Install with: npm install
+# Travel Scraper - Complete Installation Requirements
 
-# Core dependencies
+# System Requirements
+Node.js (version 18.0.0 or higher)
+Chrome or Chromium browser
+
+# Node.js Dependencies
 express@^5.1.0
 cors@^2.8.5
 dotenv@^17.1.0
 puppeteer@^24.12.1
 puppeteer-real-browser@^1.4.2
 
-# Node.js version requirement: >=18.0.0
-# 
-# To install all dependencies:
-# npm install
-#
-# To install for production only:
-# npm install --omit=dev 
+# Environment Variables
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+PUPPETEER_EXECUTABLE_PATH=chromium
+
+# Installation Commands
+npm install
+
+# Start Command
+npm start

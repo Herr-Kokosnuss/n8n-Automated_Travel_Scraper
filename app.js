@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Import your custom route handlers
+// Import custom route handlers
 const fly4freeRoutes = require('./scrapers/fly4free');
 
 // Enable CORS for all routes
