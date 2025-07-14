@@ -57,7 +57,7 @@ router.get('/', async (req, res) => {
     // Extract raw text content for LLM processing using GPT's HTML filtering approach
     console.log('Extracting raw content...');
     const rawContent = await page.evaluate(() => {
-      // 🗑️ Remove noise tags completely
+      // Remove noise tags 
       const noiseTags = ['script', 'style', 'noscript', 'iframe', 'svg', 'canvas', 'form', 'input', 'button', 'select', 'textarea'];
       noiseTags.forEach(tag => {
         document.querySelectorAll(tag).forEach(el => el.remove());
@@ -94,7 +94,7 @@ router.get('/', async (req, res) => {
       const dealLinks = Array.from(mainContent.querySelectorAll('a')).filter(link => {
         const text = link.textContent.trim();
         const href = link.href;
-        // Filter for links that contain flight-related content
+        // Filter for links that contain deal-related content
         return text.length > 20 && 
                href.includes('fly4free.com') && 
                (text.includes('€') || text.includes('$') || text.includes('£') || 
@@ -171,7 +171,6 @@ router.get('/', async (req, res) => {
       timestamp: new Date().toISOString(),
       totalDeals: rawContent.rawDeals.length,
       rawContent: rawContent,
-      instruction: "This raw content should be processed by an LLM to extract structured flight deal information including: title, price, destination, departure location, dates, and any other relevant details."
     });
     
   } catch (err) {

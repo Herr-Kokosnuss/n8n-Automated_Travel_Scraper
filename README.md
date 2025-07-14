@@ -4,7 +4,7 @@ A web scraper that extracts flight deals from travel websites and provides raw c
 
 ## Live Demo
 
-🚀 **Test the API live:** https://travel-scraper.up.railway.app/scrape/fly4free
+**Test the API live:** <a href="https://travel-scraper.up.railway.app/scrape/fly4free" target="_blank">https://travel-scraper.up.railway.app/scrape/fly4free</a>
 
 This endpoint returns JSON output with scraped flight deals from Fly4Free. You can test it directly in your browser or use it in your applications.
 
@@ -15,9 +15,9 @@ The scraper is integrated with an **n8n automation workflow** that:
 - Uses AI to structure the raw scraped data into organized deal information
 - Appends new deals to a Google Sheet for easy access
 
-**📊 View Live Results:** [Google Sheet with Scraped Deals](https://docs.google.com/spreadsheets/d/1UtK7eKRu90QTdkgRbTReAHt9zWBUvsaXTKs2oho5v5g/edit?usp=sharing)
+**View Live Results:** <a href="https://docs.google.com/spreadsheets/d/1UtK7eKRu90QTdkgRbTReAHt9zWBUvsaXTKs2oho5v5g/edit?usp=sharing" target="_blank">Google Sheet with Scraped Deals</a>
 
-**🚀 Trigger Automation:** [Activate Workflow](https://primary-production-fa50.up.railway.app/webhook/2f8c308f-5a24-4088-8a9f-ef27e2e29d9d)
+**Trigger Automation:** <a href="https://primary-production-fa50.up.railway.app/webhook/2f8c308f-5a24-4088-8a9f-ef27e2e29d9d" target="_blank">Activate Workflow</a>
 
 > **Note:** The complete automation process takes less than 1 minute. If the process takes longer than 2 minutes, please click the workflow activation link again as there may be an OpenAI server issue.
 
