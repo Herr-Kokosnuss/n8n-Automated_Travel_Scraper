@@ -8,6 +8,19 @@ A web scraper that extracts flight deals from travel websites and provides raw c
 
 This endpoint returns JSON output with scraped flight deals from Fly4Free. You can test it directly in your browser or use it in your applications.
 
+## Automated Workflow
+
+The scraper is integrated with an **n8n automation workflow** that:
+- Connects to the scraper API automatically
+- Uses AI to structure the raw scraped data into organized deal information
+- Appends new deals to a Google Sheet for easy access
+
+**📊 View Live Results:** [Google Sheet with Scraped Deals](https://docs.google.com/spreadsheets/d/1UtK7eKRu90QTdkgRbTReAHt9zWBUvsaXTKs2oho5v5g/edit?usp=sharing)
+
+**🚀 Trigger Automation:** [Activate Workflow](https://primary-production-fa50.up.railway.app/webhook/2f8c308f-5a24-4088-8a9f-ef27e2e29d9d)
+
+> **Note:** The complete automation process takes less than 1 minute. If the process takes longer than 2 minutes, please click the workflow activation link again as there may be an OpenAI server issue.
+
 ## What it does
 
 This app scrapes flight deals from Fly4Free and returns raw content that can be processed by language models or other tools. Instead of trying to parse specific HTML elements (which break easily), it extracts the full content and lets you process it however you need.
@@ -35,7 +48,7 @@ node app.js
 The server will start on port 4000. You can access the flight deals at:
 
 ```
-http://localhost:4000/api/scrape/fly4free
+http://localhost:4000/scrape/fly4free
 ```
 
 ## What you get back
