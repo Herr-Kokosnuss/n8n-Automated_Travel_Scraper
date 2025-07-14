@@ -15,6 +15,7 @@ The scraper is integrated with an **n8n automation workflow** that:
 - Uses AI to structure the raw scraped data into organized deal information
 - Appends new deals to a Google Sheet for easy access
 
+**To Run The Scraper First press the "Trigger Automation" Link, Wait 60 Second, Then check the Google Sheet in "View Live Results" with Updated Deals.**
 **View Live Results:** <a href="https://docs.google.com/spreadsheets/d/1UtK7eKRu90QTdkgRbTReAHt9zWBUvsaXTKs2oho5v5g/edit?usp=sharing" target="_blank">Google Sheet with Scraped Deals</a>
 
 **Trigger Automation:** <a href="https://primary-production-fa50.up.railway.app/webhook/2f8c308f-5a24-4088-8a9f-ef27e2e29d9d" target="_blank">Activate Workflow</a>
