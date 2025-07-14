@@ -10,12 +10,12 @@ This endpoint returns JSON output with scraped flight deals from Fly4Free. You c
 
 ## Automated Workflow
 
+**To Run The Automated Scraper: First press the "Trigger Automation" Link, Wait 60 Second, Then check the Google Sheet in "View Live Results" to view Updated Deals.**
+
 The scraper is integrated with an **n8n automation workflow** that:
 - Connects to the scraper API automatically
 - Uses AI to structure the raw scraped data into organized deal information
 - Appends new deals to a Google Sheet for easy access
-
-**To Run The Scraper First press the "Trigger Automation" Link, Wait 60 Second, Then check the Google Sheet in "View Live Results" with Updated Deals.**
 
 **View Live Results:** <a href="https://docs.google.com/spreadsheets/d/1UtK7eKRu90QTdkgRbTReAHt9zWBUvsaXTKs2oho5v5g/edit?usp=sharing" target="_blank">Google Sheet with Scraped Deals</a>
 
