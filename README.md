@@ -6,7 +6,7 @@ A web scraper that extracts flight deals from travel websites and provides raw c
 
 **Test the API live:** <a href="https://travel-scraper.up.railway.app/scrape/fly4free" target="_blank">https://travel-scraper.up.railway.app/scrape/fly4free</a>
 
-This endpoint returns JSON output with scraped flight deals from fly4free.com/flights/flight-deals/europe/ 
+This endpoint returns JSON output with scraped flight deals from "fly4free.com/flights/flight-deals/europe/" 
 You can test it directly in your browser or use it in your applications.
 
 ## Automated Workflow
